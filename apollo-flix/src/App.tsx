@@ -1,10 +1,10 @@
 import './App.css';
 import React from 'react';
-import MoviesList from './components/MoviesList.tsx';
+import MoviesList from './components/MoviesList';
 
 function App() {
   return (
-    <div>
+    <div className='container mx-auto p-4'>
       <MoviesList />
     </div>
   );

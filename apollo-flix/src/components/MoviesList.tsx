@@ -10,29 +10,32 @@ interface Movie {
 }
 
 const MoviesList = () => {
-  const { data } = useQuery<{ movies: Movie[] }>(GET_MOVIES);
+  const { loading, error, data } = useQuery<{ movies: Movie[] }>(GET_MOVIES);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <>
-      <table>
-        <thead>
+    <div className='overflow-x-auto'>
+      <table className='min-w-full table-auto'>
+        <thead className='bg-gray-100'>
           <tr>
-            <th>Title</th>
-            <th>Release Date</th>
-            <th>Rating</th>
+            <th className='px-4 py-2'>Title</th>
+            <th className='px-4 py-2'>Release Date</th>
+            <th className='px-4 py-2'>Rating</th>
           </tr>
         </thead>
         <tbody>
           {data?.movies?.map((movie) => (
-            <tr key={movie.id}>
-              <td>{movie.title}</td>
-              <td>{movie.releaseDate}</td>
-              <td>{movie.rating}</td>
+            <tr key={movie.id} className='border-b'>
+              <td className='px-4 py-2'>{movie.title}</td>
+              <td className='px-4 py-2'>{movie.releaseDate}</td>
+              <td className='px-4 py-2'>{movie.rating}</td>
             </tr>
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 
